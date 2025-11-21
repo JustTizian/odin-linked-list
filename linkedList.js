@@ -1,4 +1,4 @@
-class LinkedList {
+export default class LinkedList {
   constructor() {
     this.first = null;
   }
@@ -90,6 +90,51 @@ class LinkedList {
     }
     return null;
   }
+
+  toString() {
+    let temp = this.first;
+    let output = "";
+    while (temp) {
+      output += `( ${temp.value} ) -> `;
+      if (!temp.next) {
+        output += null;
+      }
+      temp = temp.next;
+    }
+    return output;
+  }
+
+  insertAt(value, index) {
+    if (index === 0) {
+      this.prepend(value);
+      return;
+    }
+    let previous = null;
+    let current = this.first;
+    let i = 0;
+    while (current) {
+      if (i === index) {
+        previous.next = new Node(value, current);
+      }
+      i++;
+      previous = current;
+      current = current.next;
+    }
+  }
+
+  removeAt(index) {
+    let previous = null;
+    let current = this.first;
+    let i = 0;
+    while (current) {
+      if (i === index) {
+        previous.next = current.next;
+      }
+      i++;
+      previous = current;
+      current = current.next;
+    }
+  }
 }
 
 class Node {
@@ -98,17 +143,3 @@ class Node {
     this.next = next;
   }
 }
-
-const myList = new LinkedList();
-myList.append("Head");
-myList.append("Toe");
-myList.append("Tooth");
-myList.append("Pumpkin");
-myList.append("Tail");
-myList.append("Coin");
-myList.prepend("Start");
-
-console.log(myList.contains("Start"));
-console.log(myList.find("Coin"));
-console.log(myList.find("Start"));
-console.log(myList.find("Not"));
