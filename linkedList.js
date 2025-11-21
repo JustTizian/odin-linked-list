@@ -58,10 +58,13 @@ export default class LinkedList {
   }
 
   pop() {
+    if (this.size() === 0) return;
     let temp = this.first;
+    if (!temp.next) return;
     while (temp) {
       if (!temp.next.next) {
         temp.next = null;
+        break;
       }
       temp = temp.next;
     }
@@ -109,12 +112,19 @@ export default class LinkedList {
       this.prepend(value);
       return;
     }
+
+    if (index === this.size()) {
+      this.append(value);
+      return;
+    }
+
     let previous = null;
     let current = this.first;
     let i = 0;
     while (current) {
       if (i === index) {
         previous.next = new Node(value, current);
+        return;
       }
       i++;
       previous = current;
@@ -123,12 +133,20 @@ export default class LinkedList {
   }
 
   removeAt(index) {
+    if (index >= this.size() || this.size() === 0) {
+      return;
+    }
+    if (index === 0) {
+      this.first = this.first.next;
+      return;
+    }
     let previous = null;
     let current = this.first;
     let i = 0;
     while (current) {
       if (i === index) {
         previous.next = current.next;
+        return;
       }
       i++;
       previous = current;
