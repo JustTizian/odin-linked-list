@@ -56,6 +56,40 @@ class LinkedList {
     }
     return null;
   }
+
+  pop() {
+    let temp = this.first;
+    while (temp) {
+      if (!temp.next.next) {
+        temp.next = null;
+      }
+      temp = temp.next;
+    }
+  }
+
+  contains(value) {
+    let temp = this.first;
+    while (temp) {
+      if (temp.value === value) {
+        return true;
+      }
+      temp = temp.next;
+    }
+    return false;
+  }
+
+  find(value) {
+    let index = 0;
+    let temp = this.first;
+    while (temp) {
+      if (temp.value === value) {
+        return index;
+      }
+      temp = temp.next;
+      index++;
+    }
+    return null;
+  }
 }
 
 class Node {
@@ -74,10 +108,7 @@ myList.append("Tail");
 myList.append("Coin");
 myList.prepend("Start");
 
-console.log(myList.size());
-console.log(myList.head());
-console.log(myList.tail());
-console.log("-----------");
-console.log(myList.at(0));
-console.log(myList.at(6));
-console.log(myList.at(6));
+console.log(myList.contains("Start"));
+console.log(myList.find("Coin"));
+console.log(myList.find("Start"));
+console.log(myList.find("Not"));
