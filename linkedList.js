@@ -43,8 +43,18 @@ class LinkedList {
     return temp;
   }
 
-  at(index){
-    
+  at(index) {
+    let count = 0;
+    let temp = this.first;
+    while (temp) {
+      if (count === index) {
+        return temp;
+      }
+      count++;
+
+      temp = temp.next;
+    }
+    return null;
   }
 }
 
@@ -67,3 +77,7 @@ myList.prepend("Start");
 console.log(myList.size());
 console.log(myList.head());
 console.log(myList.tail());
+console.log("-----------");
+console.log(myList.at(0));
+console.log(myList.at(6));
+console.log(myList.at(6));
